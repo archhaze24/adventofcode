@@ -32,8 +32,8 @@ fn main() {
         let existing_value = map1.get(value);
 
         match existing_value {
-            Some(v) => map1.insert(*value, v+1),
-            None => map1.insert(*value, 1)
+            Some(v) => map1.insert(*value, v + 1),
+            None => map1.insert(*value, 1),
         };
     }
 
@@ -42,8 +42,8 @@ fn main() {
         let existing_value = map2.get(value);
 
         match existing_value {
-            Some(v) => map2.insert(*value, v+1),
-            None => map2.insert(*value, 1)
+            Some(v) => map2.insert(*value, v + 1),
+            None => map2.insert(*value, 1),
         };
     }
 
