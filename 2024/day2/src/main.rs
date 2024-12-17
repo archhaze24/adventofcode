@@ -11,25 +11,31 @@ fn main() {
     // part one
     let mut counter = 0;
 
-    let reports: Vec<Vec<i32>> = file_str.lines().map(|line| line.split(" ").map(|value| value.parse().unwrap()).collect()).collect();
-    
+    let reports: Vec<Vec<i32>> = file_str
+        .lines()
+        .map(|line| {
+            line.split(" ")
+                .map(|value| value.parse().unwrap())
+                .collect()
+        })
+        .collect();
+
     for report in &reports {
         let max_diff = check_diff(report, None);
-        
+
         if max_diff < 4 && max_diff > -4 && max_diff != 0 {
             counter += 1
         }
     }
 
     println!("part one: {}", counter);
-    
+
     // part two
 
     let mut counter = 0;
-    
+
     'outer: for report in &reports {
         let max_diff = check_diff(report, None);
-
 
         if max_diff < 4 && max_diff > -4 && max_diff != 0 {
             counter += 1
@@ -38,12 +44,12 @@ fn main() {
                 let max_diff = check_diff(report, Some(skip));
                 if max_diff < 4 && max_diff > -4 && max_diff != 0 {
                     counter += 1;
-                    continue 'outer
+                    continue 'outer;
                 }
             }
         }
     }
-    
+
     println!("part two: {}", counter);
 }
 
@@ -54,23 +60,23 @@ fn check_diff(rep: &Vec<i32>, skip: Option<usize>) -> i32 {
     }
 
     if !(clone.iter().is_sorted() || clone.iter().rev().is_sorted()) {
-        return -5 // death
+        return -5; // death
     }
-    
+
     let mut max_diff = 0;
 
     for (index, value) in clone.iter().enumerate() {
         if index + 1 == clone.len() {
-            break
+            break;
         }
 
-        let diff = value - clone[index+1];
+        let diff = value - clone[index + 1];
         if diff == 0 {
             max_diff = 0;
-            break
+            break;
         }
         max_diff = max_diff.max(diff.abs()) // since it can be decreasing
     }
-    
+
     max_diff
 }
